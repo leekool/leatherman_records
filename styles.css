@@ -1,0 +1,393 @@
+@font-face {
+  font-family: 'Tamzen';
+  src: url('font/Tamzen10x20r.ttf') format('truetype'),
+       url('font/Tamzen10x20r.eot') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --bg: #523525;
+  --fg: #7ec160;
+  --secondaryFg: #7ec160;
+  --thirdFg: #936749;
+  --containerBg: #452C1F;
+  --searchBg: var(--containerBg);
+  --scrollbarColor: #3f3f3f;
+  --fontFamily: 'Tamzen';
+}
+
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+div.border::before {
+  content: '';
+  position: fixed;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  border: 2px solid #32302c;
+  box-shadow: 0 0 0 2px #222020 inset,
+              0 0 0 1px #222020;
+  z-index: 9;
+  pointer-events: none;
+  max-height: calc(100% - 26px);
+}
+
+body:before {
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  /* background: url(mask2.gif) no-repeat center center; */
+  -webkit-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
+
+body {
+  margin: 0;
+  image-rendering: pixelated;
+}
+
+/* header */
+
+nav {width: 100%; margin: 0 auto;}
+
+header {
+    height: 22px;
+    background-image: url('image/titlebar-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    top: 4px;
+    left: 50%;
+    margin-left: calc(-50% + 4px);
+    width: calc(100% - 8px);
+    position: fixed;
+    box-shadow: 0 -1px 0 0 #5c6057 inset;
+    z-index: 8;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+footer {
+    height: 20px;
+    background-image: url('image/menu-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    bottom: 0;
+    left: 50%;
+    margin-left: -50%;
+    width: 100%;
+    position: fixed;
+    border-top: 1px solid #32302c;
+    box-shadow: 1px 1px #fffefe inset,
+                -1px -1px #948c79 inset;
+    z-index: 8;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Tamzen', sans-serif;
+    font-size: 12px;
+}
+
+.start-button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    background-color: #1C00ff00;
+    user-select: none;
+    outline: none;
+    box-shadow: -1px -1px #948c79 inset,
+                -1px 0 0 0 #fffefe inset;
+}
+
+.taskbar-container {
+  display: flex;
+  width: 100%;
+  box-shadow: -1px -1px #948c79 inset,
+              1px 1px #fffefe inset;
+
+}
+
+#taskbar-button {
+  cursor: pointer;
+  display: flex;
+  width: 180px;
+  margin: 3px 0 3px 3px;
+  font-size: 10px;
+  align-items: center;
+  user-select: none;
+}
+
+.taskbar-button-inactive {
+  color: #000;
+  background-image: none;
+  box-shadow: none;
+}
+
+.taskbar-button-active {
+  color: #fffefe;
+  background-image: url('image/menu_hover-tile.png');
+  box-shadow: -1px -1px #92998b inset,
+              1px 1px #5c6057 inset;
+}
+
+#taskbar-button img {
+  max-height: 11px;
+  margin: 2px;
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+.title-text {
+    font-family: 'Tamzen';
+    font-size: 12px;
+    color: white;
+    display: flex;
+    align-items: center;
+    height: 22px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    user-select: none;
+}
+
+header a {
+    color: #969696;
+    text-decoration: none;
+    font-family: 'Tamzen', sans-serif;
+    font-size: 1em;
+}
+
+
+.menu-button {
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    background-color: #1C00ff00;
+    outline: none;
+    border: none;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown {background-color: #000000;}
+/* .start-menu:hover .start-menu-content {display: block;} */
+
+.menu-button img {
+    max-height: 40%;
+    padding: 15px;
+}
+
+.menu-button img:hover {
+    opacity: 0.3;
+}
+
+.title-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 63px;
+}
+
+.title-buttons img {
+  cursor: pointer;
+  max-height: 40%;
+  padding: 5px;
+}
+
+.title-buttons img:hover {
+    opacity: 0.3;
+}
+
+.dropdown {
+    position: relative;
+    display: flex;
+}
+
+.start-menu {
+  position: relative;
+  display: flex;
+}
+
+
+.start-menu-content {
+    display: none;
+    position: absolute;
+    bottom: 22px;
+    left: -1px;
+    background-image: url('image/menu-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    min-width: 57px;
+    box-shadow: 0 0 0 1px #32302c inset,
+                2px 2px #fffefe inset,
+                -2px -2px #948c79 inset;
+    z-index: 10;
+    font-size: 12px;
+    min-height: 200px;
+    min-width: 100px;
+}
+
+.dropdown-content {
+    display: none;
+    top: 22px;
+    left: 1px;
+    position: absolute;
+    background-image: url('image/menu-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    min-width: 57px;
+    box-shadow: 0 0 0 1px #32302c inset,
+                2px 2px #fffefe inset,
+                -2px -2px #948c79 inset,
+                0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 12px;
+}
+
+.dropdown-content a {
+    margin: 2px;
+    text-indent: -3px;
+    color: #32302c;
+    padding: 2px 5px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    color: #fffefe;
+    background-image: url('image/menu_hover-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    box-shadow: -1px -1px #92998b inset,
+                1px 1px #5c6057 inset;
+}
+
+/* end header */
+
+.container {
+  padding: 50px 0 50px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url('image/Untitled.png');
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+.container a {
+    padding: 3%;
+}
+
+.desktop {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-image: url('image/sunset-tile.png');
+  background-color: #7f84a3;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-size: auto;
+}
+
+.icon-container {
+  margin: 15px 0 0 15px;
+  max-width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.desktop-icon {
+  display: flex;
+}
+
+.desktop-icon-text {
+  font-family: 'Tamzen';
+  font-size: 12px;
+  text-shadow: 1px 1px #fffefe;
+  text-align: center;
+  user-select: none;
+}
+
+
+/* .player { */
+/*   color: #fff; */
+/*   display: flex; */
+/*   align-items: center; */
+/* } */
+/* .player .ant-btn { */
+/*   margin-right: 2px; */
+/* } */
+/* .player__controls { */
+/*   display: flex; */
+/* } */
+/* .player__sound { */
+/*   display: flex; */
+/*   flex-basis: 150px; */
+/*   align-items: center; */
+/* } */
+/* .player__sound .ant-slider { */
+/*   width: 70%; */
+/*   margin: 0 0 0 7px; */
+/* } */
+
+.dividend {
+  position: relative;
+  display: flex;
+  width: 60%;
+  height: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  image-rendering: smooth;
+}
+
+.lmr001 {
+  position: relative;
+  display: flex;
+  width: 60%;
+  height: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  image-rendering: smooth;
+}
+
+.minimise {
+
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and ( max-width: 700px ) {
+  .container a      {padding: 20px;}
+  .leathergaptop	{padding: 39%;}
+  .dividend			{width: 80%;}
+  .showonmobile     {padding: 100px;}
+}

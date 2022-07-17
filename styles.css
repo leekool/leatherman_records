@@ -281,23 +281,8 @@ header a {
 
 /* end header */
 
-.container {
-  padding: 50px 0 50px 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-image: url('image/Untitled.png');
-  background-repeat: repeat;
-  background-size: auto;
-}
-
-.container a {
-    padding: 3%;
-}
-
 .desktop {
+  position: absolute;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -306,6 +291,7 @@ header a {
   background-repeat: repeat-x;
   background-attachment: fixed;
   background-size: auto;
+  z-index: 5;
 }
 
 .icon-container {
@@ -351,28 +337,71 @@ header a {
 /*   margin: 0 0 0 7px; */
 /* } */
 
-.dividend {
+/* genuine leather */
+#genuine-leather {
   position: relative;
   display: flex;
+  flex-direction: column;
+}
+
+.container {
+  padding: 50px 0 50px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url('image/Untitled.png');
+  background-repeat: repeat;
+  background-size: auto;
+  /* background-position: calc(100% + 72px) calc(100% + 70px); */
+ }
+
+.small-container {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  height: 200px;
+}
+
+.small-container-border {
+  border: 2px solid #32302c;
+  box-shadow: 0 0 0 2px #222020,
+              0 0 0 3px #222020;
+  z-index: 10;
+}
+
+small-container-header {
+    height: 22px;
+    background-image: url('image/titlebar-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    top: 4px;
+    left: 50%;
+    margin-left: calc(-50% + 4px);
+    width: calc(100% - 8px);
+    position: fixed;
+    box-shadow: 0 -1px 0 0 #5c6057 inset;
+    z-index: 8;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.container a {
+  padding: 3%;
+  display: flex;
+}
+
+.dividend {
   width: 60%;
   height: auto;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
   margin: auto;
   image-rendering: smooth;
 }
 
 .lmr001 {
-  position: relative;
-  display: flex;
   width: 60%;
   height: auto;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
   margin: auto;
   image-rendering: smooth;
 }
@@ -387,7 +416,5 @@ header a {
 
 @media screen and ( max-width: 700px ) {
   .container a      {padding: 20px;}
-  .leathergaptop	{padding: 39%;}
   .dividend			{width: 80%;}
-  .showonmobile     {padding: 100px;}
 }

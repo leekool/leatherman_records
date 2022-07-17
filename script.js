@@ -1,6 +1,8 @@
 let border = document.querySelector('div#border');
+let genuineLeather = document.querySelector('div#genuine-leather');
 let container = document.querySelector('div.container');
 let minimise = document.querySelectorAll('.minimise');
+let maximise = document.querySelectorAll('.maximise');
 let close = document.querySelectorAll('.close');
 let header = document.querySelector('header');
 let taskbarButton = document.querySelector('div#taskbar-button');
@@ -60,6 +62,16 @@ function bigLeather() {
 
   }));
 
+  // clear highlighted leather desktop icon when clicking away
+  if (desktopIconText.style.textShadow = 'none') {
+    body.addEventListener('click', function () {
+      clearIconHighlight();
+    }, false);
+    desktopIcon.forEach(e => e.addEventListener('click', function (e) {
+      e.stopPropagation();
+    }, false));
+  }
+
   // leather desktop icon (single click)
   desktopIcon.forEach(e => e.addEventListener('click', function (e) {
 
@@ -68,7 +80,6 @@ function bigLeather() {
     desktopIconText.style.color = '#fffefe';
     desktopIconText.style.border = '1px dotted #fffefe';
     desktopIconText.style.textShadow = 'none';
-
 
   }));
 
@@ -89,6 +100,30 @@ function bigLeather() {
     desktop.classList.add('hide');
 
     clearIconHighlight();
+
+  }));
+
+  // maximise button
+  maximise.forEach(e => e.addEventListener('click', function (e) {
+    if (container.style.width = '100%') {
+
+      border.classList.toggle('border');
+      header.classList.toggle('hide');
+      desktop.classList.remove('hide');
+
+      container.classList.toggle('small-container');
+      genuineLeather.classList.toggle('small-container-border');
+      genuineLeather.style.width = '75%';
+
+      // surely better way to do this
+      genuineLeather.style.margin = '40% auto 0';
+      desktop.style.margin = '-40% auto 0';
+
+      // work out why this isn't on by default
+      desktopIconText.style.textShadow = '1px 1px #fffefe';
+
+
+    }
 
   }));
 

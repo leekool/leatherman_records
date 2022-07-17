@@ -105,23 +105,24 @@ function bigLeather() {
 
   // maximise button
   maximise.forEach(e => e.addEventListener('click', function (e) {
-    if (container.style.width = '100%') {
 
-      border.classList.toggle('border');
-      header.classList.toggle('hide');
+    border.classList.toggle('border');
+    header.classList.toggle('header-resize');
+    container.classList.toggle('small-container');
+    genuineLeather.classList.toggle('small-container-border');
+
+    if (container.classList.contains('small-container')) {
       desktop.classList.remove('hide');
-
-      container.classList.toggle('small-container');
-      genuineLeather.classList.toggle('small-container-border');
       genuineLeather.style.width = '75%';
-
       genuineLeather.style.inset = '25% auto';
-
-      // work out why this isn't on by default
-      desktopIconText.style.textShadow = '1px 1px #fffefe';
-
-
+    } else {
+      desktop.classList.add('hide');
+      genuineLeather.style.width = '100%';
+      genuineLeather.style.inset = '0';
     }
+
+    // work out why this isn't on by default
+    desktopIconText.style.textShadow = '1px 1px #fffefe';
 
   }));
 

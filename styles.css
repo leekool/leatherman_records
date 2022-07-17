@@ -26,6 +26,10 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+#border {
+  height: 100vh;
+}
+
 div.border::before {
   content: '';
   position: fixed;
@@ -342,6 +346,7 @@ header a {
   position: relative;
   display: flex;
   flex-direction: column;
+  margin: auto;
 }
 
 .container {

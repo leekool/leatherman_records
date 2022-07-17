@@ -115,9 +115,7 @@ function bigLeather() {
       genuineLeather.classList.toggle('small-container-border');
       genuineLeather.style.width = '75%';
 
-      // surely better way to do this
-      genuineLeather.style.margin = '40% auto 0';
-      desktop.style.margin = '-40% auto 0';
+      genuineLeather.style.inset = '25% auto';
 
       // work out why this isn't on by default
       desktopIconText.style.textShadow = '1px 1px #fffefe';

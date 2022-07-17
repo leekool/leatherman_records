@@ -12,13 +12,37 @@ let desktopIcon = document.querySelectorAll('.desktop-icon');
 let desktopIconText = document.querySelector('.desktop-icon-text');
 
 function clearIconHighlight() {
-    if (desktopIconText.ownerDocument.defaultView.getComputedStyle(desktopIconText, null).color == 'rgb(255, 254, 254)') {
-      document.getElementsByClassName('desktop-icon')[0].setAttribute('src', 'image/leather_desktop.png');
-      desktopIconText.style.background = 'none';
-      desktopIconText.style.color = '#000';
-      desktopIconText.style.border = 'none';
-      desktopIconText.style.textShadow = '1px 1px #fffefe';
-    }
+  if (desktopIconText.ownerDocument.defaultView.getComputedStyle(desktopIconText, null).color == 'rgb(255, 254, 254)') {
+    document.getElementsByClassName('desktop-icon')[0].setAttribute('src', 'image/leather_desktop.png');
+    desktopIconText.style.background = 'none';
+    desktopIconText.style.color = '#000';
+    desktopIconText.style.border = 'none';
+    desktopIconText.style.textShadow = '1px 1px #fffefe';
+  }
+}
+
+function clearResizeStyles() {
+
+  // genuineLeather is small and not visible
+  if (container.style.width !== '100%' && container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none') {
+
+    border.classList.toggle('border');
+    header.classList.toggle('header-resize');
+    container.classList.toggle('small-container');
+    genuineLeather.classList.toggle('small-container-border');
+    genuineLeather.style.width = '100%';
+    genuineLeather.style.inset = '0';
+
+  // genuineLeather is small and visible
+  } else if (container.style.width !== '100%' && container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex') {
+
+    header.classList.toggle('header-resize');
+    container.classList.toggle('small-container');
+    genuineLeather.classList.toggle('small-container-border');
+    // genuineLeather.style.width = '100%';
+    // genuineLeather.style.inset = '0';
+
+  }
 }
 
 if (document.readyState !== 'loading') {
@@ -32,10 +56,11 @@ function bigLeather() {
   // minimise button
   minimise.forEach(e => e.addEventListener('click', function (e) {
 
-    border.classList.toggle('border');
     container.classList.toggle('hide');
     header.classList.toggle('hide');
+    border.classList.toggle('border');
 
+    // taskbar button
     if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none') {
       taskbarButton.classList.remove('taskbar-button-active');
       taskbarButton.classList.add('taskbar-button-inactive');
@@ -47,7 +72,7 @@ function bigLeather() {
     }
 
     clearIconHighlight();
-
+    clearResizeStyles();
   }));
 
   // close button
@@ -57,9 +82,10 @@ function bigLeather() {
     container.classList.toggle('hide');
     header.classList.toggle('hide');
     desktop.classList.remove('hide');
-
     taskbarButton.style.display = 'none';
 
+    clearResizeStyles();
+    clearIconHighlight();
   }));
 
   // clear highlighted leather desktop icon when clicking away

@@ -56,23 +56,29 @@ function bigLeather() {
   // minimise button
   minimise.forEach(e => e.addEventListener('click', function (e) {
 
-    container.classList.toggle('hide');
-    header.classList.toggle('hide');
-    border.classList.toggle('border');
+    if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex') {
 
-    // taskbar button
-    if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none') {
+      container.classList.add('hide');
+      header.classList.add('hide');
+      border.classList.remove('border');
+
       taskbarButton.classList.remove('taskbar-button-active');
       taskbarButton.classList.add('taskbar-button-inactive');
       desktop.classList.remove('hide');
-    } else {
+
+    } else if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none') {
+
+      container.classList.remove('hide');
+      header.classList.remove('hide');
+      border.classList.add('border');
+
       taskbarButton.classList.remove('taskbar-button-inactive');
       taskbarButton.classList.add('taskbar-button-active');
       desktop.classList.add('hide');
+
     }
 
     clearIconHighlight();
-    clearResizeStyles();
   }));
 
   // close button
@@ -84,7 +90,6 @@ function bigLeather() {
     desktop.classList.remove('hide');
     taskbarButton.style.display = 'none';
 
-    clearResizeStyles();
     clearIconHighlight();
   }));
 

@@ -106,8 +106,8 @@ function bigLeather() {
     taskbarButton.style.display = 'none';
 
     // genuineLeather is small & visible
-    }  if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex' &&
-           container.classList.contains('small-container')) {
+    if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex' &&
+        container.classList.contains('small-container')) {
 
       header.classList.remove('header-resize');
       container.classList.remove('small-container');

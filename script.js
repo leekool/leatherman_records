@@ -147,16 +147,16 @@ function bigLeather() {
       taskbarButton.style.display = 'flex';
     }
 
-    border.classList.toggle('border');
-    container.classList.toggle('hide');
-    header.classList.toggle('hide');
-
-    taskbarButton.classList.remove('taskbar-button-inactive');
-    taskbarButton.classList.add('taskbar-button-active');
-    desktop.classList.add('hide');
+    if (!container.classList.contains('small-container')) {
+      border.classList.toggle('border');
+      container.classList.toggle('hide');
+      header.classList.toggle('hide');
+      taskbarButton.classList.remove('taskbar-button-inactive');
+      taskbarButton.classList.add('taskbar-button-active');
+      desktop.classList.add('hide');
+    }
 
     clearIconHighlight();
-
   }));
 
   // maximise button

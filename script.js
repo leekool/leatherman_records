@@ -23,26 +23,15 @@ function clearIconHighlight() {
 
 function clearResizeStyles() {
 
-  // genuineLeather is small and not visible
-  if (container.style.width !== '100%' && container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none') {
+  container.classList.add('hide');
+  header.classList.add('hide');
+  border.classList.remove('border');
 
-    border.classList.toggle('border');
-    header.classList.toggle('header-resize');
-    container.classList.toggle('small-container');
-    genuineLeather.classList.toggle('small-container-border');
-    genuineLeather.style.width = '100%';
-    genuineLeather.style.inset = '0';
+  taskbarButton.classList.remove('taskbar-button-active');
+  taskbarButton.classList.add('taskbar-button-inactive');
+  genuineLeather.classList.remove('small-container-border');
+  desktop.classList.remove('hide');
 
-  // genuineLeather is small and visible
-  } else if (container.style.width !== '100%' && container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex') {
-
-    header.classList.toggle('header-resize');
-    container.classList.toggle('small-container');
-    genuineLeather.classList.toggle('small-container-border');
-    // genuineLeather.style.width = '100%';
-    // genuineLeather.style.inset = '0';
-
-  }
 }
 
 if (document.readyState !== 'loading') {
@@ -56,7 +45,9 @@ function bigLeather() {
   // minimise button
   minimise.forEach(e => e.addEventListener('click', function (e) {
 
-    if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex') {
+    // genuineLeather is full size & visible
+    if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex' &&
+        !container.classList.contains('small-container')) {
 
       container.classList.add('hide');
       header.classList.add('hide');
@@ -66,7 +57,9 @@ function bigLeather() {
       taskbarButton.classList.add('taskbar-button-inactive');
       desktop.classList.remove('hide');
 
-    } else if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none') {
+    // genuineLeather is full size & not visible
+    } else if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none' &&
+               !container.classList.contains('small-container')) {
 
       container.classList.remove('hide');
       header.classList.remove('hide');
@@ -76,6 +69,28 @@ function bigLeather() {
       taskbarButton.classList.add('taskbar-button-active');
       desktop.classList.add('hide');
 
+    // genuineLeather is small & visible
+    } else if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex' &&
+               container.classList.contains('small-container')) {
+
+      container.classList.add('hide');
+      header.classList.add('hide');
+      genuineLeather.classList.remove('small-container-border');
+
+      taskbarButton.classList.remove('taskbar-button-active');
+      taskbarButton.classList.add('taskbar-button-inactive');
+
+    // genuineLeather is small & not visible
+    } else if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none' &&
+               container.classList.contains('small-container')) {
+
+      container.classList.remove('hide');
+      header.classList.remove('hide');
+      genuineLeather.classList.add('small-container-border');
+
+      taskbarButton.classList.remove('taskbar-button-inactive');
+      taskbarButton.classList.add('taskbar-button-active');
+
     }
 
     clearIconHighlight();
@@ -84,11 +99,23 @@ function bigLeather() {
   // close button
   close.forEach(e => e.addEventListener('click', function (e) {
 
-    border.classList.toggle('border');
-    container.classList.toggle('hide');
-    header.classList.toggle('hide');
+    border.classList.remove('border');
+    container.classList.add('hide');
+    header.classList.add('hide');
     desktop.classList.remove('hide');
     taskbarButton.style.display = 'none';
+
+    // genuineLeather is small & visible
+    }  if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex' &&
+           container.classList.contains('small-container')) {
+
+      header.classList.remove('header-resize');
+      container.classList.remove('small-container');
+      genuineLeather.classList.remove('small-container-border');
+      genuineLeather.style.width = '100%';
+      genuineLeather.style.inset = '0';
+
+    }
 
     clearIconHighlight();
   }));

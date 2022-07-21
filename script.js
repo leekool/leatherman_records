@@ -99,23 +99,21 @@ function bigLeather() {
   // close button
   close.forEach(e => e.addEventListener('click', function (e) {
 
-    border.classList.remove('border');
-    container.classList.add('hide');
-    header.classList.add('hide');
-    desktop.classList.remove('hide');
-    taskbarButton.style.display = 'none';
-
     // genuineLeather is small & visible
     if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'flex' &&
         container.classList.contains('small-container')) {
-
       header.classList.remove('header-resize');
       container.classList.remove('small-container');
       genuineLeather.classList.remove('small-container-border');
       genuineLeather.style.width = '100%';
       genuineLeather.style.inset = '0';
-
     }
+
+    border.classList.remove('border');
+    container.classList.add('hide');
+    header.classList.add('hide');
+    desktop.classList.remove('hide');
+    taskbarButton.style.display = 'none';
 
     clearIconHighlight();
   }));

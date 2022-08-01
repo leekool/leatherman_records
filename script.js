@@ -10,10 +10,21 @@ let body = document.querySelector('body');
 let desktop = document.querySelector('.desktop');
 let desktopIcon = document.querySelectorAll('.desktop-icon');
 let desktopIconText = document.querySelector('.desktop-icon-text');
+let desktopIconImage = document.querySelector('.desktop-icon-image');
+let tapes = document.querySelectorAll('.lmr001');
+
+let availableWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 function clearIconHighlight() {
   if (desktopIconText.ownerDocument.defaultView.getComputedStyle(desktopIconText, null).color == 'rgb(255, 254, 254)') {
-    document.getElementsByClassName('desktop-icon')[0].setAttribute('src', 'image/leather_desktop.png');
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+         || availableWidth < 700) {
+      desktopIconImage.style.content = 'url("image/leather_desktop.png")';
+    } else {
+      desktopIconImage.style.content = 'url("image/double/leather_desktop.png")';
+    }
+
     desktopIconText.style.background = 'none';
     desktopIconText.style.color = '#000';
     desktopIconText.style.border = 'none';
@@ -131,7 +142,13 @@ function bigLeather() {
   // leather desktop icon (single click)
   desktopIcon.forEach(e => e.addEventListener('click', function (e) {
 
-    document.getElementsByClassName('desktop-icon')[0].setAttribute('src', 'image/leather_desktop-pressed.png');
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+         || availableWidth < 700) {
+      desktopIconImage.style.content = 'url("image/leather_desktop-pressed.png")';
+    } else {
+      desktopIconImage.style.content = 'url("image/double/leather_desktop-pressed.png")';
+    }
+
     desktopIconText.style.background = '#0404fc';
     desktopIconText.style.color = '#fffefe';
     desktopIconText.style.border = '1px dotted #fffefe';
@@ -169,12 +186,30 @@ function bigLeather() {
 
     if (container.classList.contains('small-container')) {
       desktop.classList.remove('hide');
-      genuineLeather.style.width = '75%';
-      genuineLeather.style.inset = '25% auto';
+      genuineLeather.style.inset = '150px auto';
+
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || availableWidth < 700) {
+        genuineLeather.style.width = '80%'; /*availableWidth * .8 + 'px';*/
+        tapes.forEach(tape => {
+          tape.style.width = '55%';
+        });
+      } else {
+        genuineLeather.style.width = '830px'; /*availableWidth * .8 + 'px';*/
+      }
+
     } else {
       desktop.classList.add('hide');
       genuineLeather.style.width = '100%';
       genuineLeather.style.inset = '0';
+
+      tapes.forEach(tape => {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || availableWidth < 700) {
+          tape.style.width = '50%';
+        } else {
+          tape.style.width = '80%';
+        }
+      });
+
     }
 
     // work out why this isn't on by default

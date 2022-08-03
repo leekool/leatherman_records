@@ -201,7 +201,8 @@ function bigLeather() {
     if (container.classList.contains('small-container')) {
 
       desktop.classList.remove('hide');
-      genuineLeather.style.inset = '150px auto';
+      genuineLeather.style.inset = '8% auto';
+      genuineLeather.style.height = '80%';
 
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || availableWidth < 700) {
         genuineLeather.style.width = '80%'; /*availableWidth * .8 + 'px';*/
@@ -216,8 +217,9 @@ function bigLeather() {
     } else {
 
       desktop.classList.add('hide');
-      genuineLeather.style.width = '100%';
       genuineLeather.style.inset = '0';
+      genuineLeather.style.height = '100%'
+      genuineLeather.style.width = '100%';
 
       tapes.forEach(tape => {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || availableWidth < 700) {

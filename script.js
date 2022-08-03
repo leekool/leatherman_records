@@ -166,12 +166,25 @@ function bigLeather() {
     }
 
     if (!container.classList.contains('small-container')) {
+
       border.classList.toggle('border');
       container.classList.toggle('hide');
       header.classList.toggle('hide');
       taskbarButton.classList.remove('taskbar-button-inactive');
       taskbarButton.classList.add('taskbar-button-active');
       desktop.classList.add('hide');
+
+     // if genuineLeather is small & not visible
+     } else if (container.ownerDocument.defaultView.getComputedStyle(container, null).display == 'none' &&
+               container.classList.contains('small-container')) {
+
+      container.classList.remove('hide');
+      header.classList.remove('hide');
+      genuineLeather.classList.add('small-container-border');
+
+      taskbarButton.classList.remove('taskbar-button-inactive');
+      taskbarButton.classList.add('taskbar-button-active');
+
     }
 
     clearIconHighlight();
@@ -188,8 +201,7 @@ function bigLeather() {
     if (container.classList.contains('small-container')) {
 
       desktop.classList.remove('hide');
-      genuineLeather.style.height = '80%';
-      genuineLeather.style.inset = '100px auto';
+      genuineLeather.style.inset = '150px auto';
 
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || availableWidth < 700) {
         genuineLeather.style.width = '80%'; /*availableWidth * .8 + 'px';*/
@@ -204,7 +216,6 @@ function bigLeather() {
     } else {
 
       desktop.classList.add('hide');
-      genuineLeather.style.height = '100%';
       genuineLeather.style.width = '100%';
       genuineLeather.style.inset = '0';
 

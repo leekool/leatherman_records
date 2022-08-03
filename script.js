@@ -28,7 +28,7 @@ function clearIconHighlight() {
     desktopIconText.style.background = 'none';
     desktopIconText.style.color = '#000';
     desktopIconText.style.border = 'none';
-    desktopIconText.style.textShadow = '1px 1px #fffefe';
+    // desktopIconText.style.textShadow = '1px 1px #fffefe';
   }
 }
 
@@ -47,6 +47,7 @@ function clearResizeStyles() {
 
 if (document.readyState !== 'loading') {
   bigLeather();
+  desktopIconText.style.textShadow = '1px 1px #fffefe !important';
 } else {
   document.addEventListener('DOMContentLoaded', bigLeather);
 }
@@ -185,20 +186,25 @@ function bigLeather() {
     genuineLeather.classList.toggle('small-container-border');
 
     if (container.classList.contains('small-container')) {
+
       desktop.classList.remove('hide');
-      genuineLeather.style.inset = '150px auto';
+      genuineLeather.style.height = '80%';
+      genuineLeather.style.inset = '100px auto';
 
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || availableWidth < 700) {
         genuineLeather.style.width = '80%'; /*availableWidth * .8 + 'px';*/
-        tapes.forEach(tape => {
-          tape.style.width = '55%';
-        });
       } else {
         genuineLeather.style.width = '830px'; /*availableWidth * .8 + 'px';*/
       }
 
+      tapes.forEach(tape => {
+          tape.style.width = '55%';
+        });
+
     } else {
+
       desktop.classList.add('hide');
+      genuineLeather.style.height = '100%';
       genuineLeather.style.width = '100%';
       genuineLeather.style.inset = '0';
 
@@ -211,9 +217,6 @@ function bigLeather() {
       });
 
     }
-
-    // work out why this isn't on by default
-    desktopIconText.style.textShadow = '1px 1px #fffefe';
 
   }));
 

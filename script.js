@@ -226,6 +226,9 @@ function bigLeather() {
   // leather desktop icon (double click)
   desktopIcon.forEach(e => e.addEventListener('dblclick', function (e) {
     doubleClick();
+    if (availableWidth > 700) {
+      resizeWindow();
+    }
   }));
   // maximise button
   maximise.forEach(e => e.addEventListener('click', function (e) {

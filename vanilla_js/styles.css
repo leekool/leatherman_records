@@ -1,0 +1,541 @@
+@font-face {
+  font-family: 'Tamzen';
+  src: url('font/Tamzen10x20r.ttf') format('truetype'),
+       url('font/Tamzen10x20r.eot') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* --- scrollbar --- */
+html {
+  -ms-overflow-style: none;  /* ie & edge */
+  scrollbar-width: none;  /* firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- body --- */
+body:before {
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  /* background: url(mask2.gif) no-repeat center center; */
+  -webkit-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
+
+body {
+  margin: 0;
+  image-rendering: pixelated;
+}
+
+/* --- full page window border --- */
+#border {
+  height: 100vh;
+}
+
+div.border::before {
+  content: '';
+  position: fixed;
+  inset: 1.8px; /* for some reason leaves tiny gap on firefox if 2px */
+  border: 4px solid #32302c;
+  box-shadow: 0 0 0 4px #222020 inset,
+              0 0 0 2px #222020;
+  z-index: 9;
+  pointer-events: none;
+  max-height: calc(100% - 52px);
+}
+
+/* --- desktop --- */
+.desktop {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-image: url('image/double/sunset-tile.png');
+  background-color: #7f84a3;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-size: auto;
+  z-index: 5;
+}
+
+.icon-container {
+  margin: 30px 0 0 20px;
+  max-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.desktop-icon {
+  display: flex;
+  max-width: 80%;
+}
+
+.desktop-icon-image {
+  content: url('image/double/leather_desktop.png');
+}
+
+.desktop-icon-text {
+  font-family: 'Tamzen';
+  font-size: 20px;
+  text-shadow: 1px 1px #fffefe;
+  text-align: center;
+  user-select: none;
+}
+
+/* --- taskbar --- */
+footer {
+    height: 40px;
+    background-image: url('image/double/menu-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    bottom: 0;
+    left: 50%;
+    margin-left: -50%;
+    width: 100%;
+    position: fixed;
+    border-top: 2px solid #222020;
+    box-shadow: 2px 2px #fffefe inset,
+                -2px -2px #948c79 inset;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Tamzen', sans-serif;
+    font-size: 24px;
+}
+
+.taskbar-container {
+  display: flex;
+  width: 100%;
+  box-shadow: -2px -2px #948c79 inset,
+              2px 2px #fffefe inset;
+}
+
+.start-button {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    background-color: #1C00ff00;
+    user-select: none;
+    outline: none;
+    box-shadow: -2px -2px #948c79 inset,
+                -2px 0 0 0 #fffefe inset;
+}
+
+.start-menu {
+  position: relative;
+  display: flex;
+}
+
+.start-menu-content {
+    display: none;
+    position: absolute;
+    bottom: 44px;
+    left: -2px;
+    background-image: url('image/double/menu-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    min-width: 114px;
+    box-shadow: 0 0 0 2px #32302c inset,
+                4px 4px #fffefe inset,
+                -4px -4px #948c79 inset;
+    z-index: 10;
+    font-size: 24px;
+    min-height: 400px;
+    min-width: 200px;
+}
+
+/* .start-menu:hover .start-menu-content {display: block;} */
+
+#taskbar-button {
+  cursor: pointer;
+  display: flex;
+  width: 360px;
+  margin: 5px 0 5px 5px;
+  font-size: 20px;
+  align-items: center;
+  user-select: none;
+}
+
+.taskbar-button-inactive {
+  color: #000;
+  background-image: none;
+  box-shadow: none;
+}
+
+.taskbar-button-active {
+  color: #fffefe;
+  background-image: url('image/double/menu_hover-tile.png');
+  box-shadow: -2px -2px #92998b inset,
+              2px 2px #5c6057 inset;
+}
+
+#taskbar-button img {
+  max-height: 22px;
+  margin: 4px;
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+/* --- titlebar --- */
+header {
+    height: 44px;
+    background-image: url('image/double/titlebar-tile.png');
+    background-repeat: repeat;
+    top: 8px;
+    left: 50%;
+    margin-left: calc(-50% + 8px);
+    width: calc(100% - 16px);
+    position: fixed;
+    box-shadow: 0 -1px 0 0 #5c6057 inset;
+    z-index: 8;
+    display: flex;
+    justify-content: space-between;
+    /* gap: 40px; */
+}
+
+.header-resize {
+    top: 0;
+    margin-left: -50%;
+    width: 100%;
+    position: relative;
+}
+
+header a {
+    color: #969696;
+    text-decoration: none;
+    font-family: 'Tamzen', sans-serif;
+    font-size: 1em;
+}
+
+.menu-button {
+    cursor: pointer;
+    display: flex;
+    /* gap: 20px; */
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    background-color: #1C00ff00;
+    outline: none;
+    border: none;
+}
+
+.menu-button img {
+    max-height: 40%;
+    padding: 15px;
+}
+
+.menu-button img:hover {
+    opacity: 0.3;
+}
+
+.title-text {
+    font-family: 'Tamzen';
+    font-size: 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    height: 44px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    user-select: none;
+}
+
+
+.title-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 126px;
+}
+
+.title-buttons img {
+  cursor: pointer;
+  max-height: 40%;
+  padding: 10px;
+}
+
+.title-buttons img:hover {
+    opacity: 0.3;
+}
+
+.dropdown {
+    position: relative;
+    display: flex;
+}
+
+.dropdown-content {
+    display: none;
+    top: 44px;
+    left: 1px;
+    position: absolute;
+    background-image: url('image/double/menu-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    min-width: 114px;
+    box-shadow: 0 0 0 2px #32302c inset,
+                4px 4px #fffefe inset,
+                -4px -4px #948c79 inset,
+                0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 24px;
+}
+
+.dropdown-content a {
+    margin: 4px;
+    text-indent: -6px;
+    color: #32302c;
+    padding: 4px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    color: #fffefe;
+    background-image: url('image/double/menu_hover-tile.png');
+    background-repeat: repeat;
+    background-size: auto;
+    box-shadow: -2px -2px #92998b inset,
+                2px 2px #5c6057 inset;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown {background-color: #000000;}
+
+/* --- genuine leather --- */
+#genuine-leather {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.container {
+  padding: 100px 0 100px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url('image/double/Untitled.png');
+  background-repeat: repeat;
+  background-size: auto;
+  -ms-overflow-style: none;  /* ie & edge */
+  scrollbar-width: none;  /* firefox */
+}
+
+.container a {
+  padding: 50px;
+  display: flex;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.small-container {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  height: 840px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 0;
+}
+
+.small-container-border {
+  box-shadow: 0 0 0 4px #222020,
+              0 0 0 8px #32302c,
+              0 0 0 10px #222020;
+  z-index: 10;
+}
+
+.dividend {
+  width: 77%;
+  height: auto;
+  margin: auto;
+  image-rendering: smooth;
+}
+
+.lmr001 {
+  width: 80%;
+  height: auto;
+  margin: auto;
+  image-rendering: smooth;
+}
+
+/* --- hide --- */
+.hide {
+  display: none;
+}
+
+/* --- mobile --- */
+@media screen and ( max-width: 700px ) {
+  div.border::before {
+    inset: 1px;
+    border: 2px solid #32302c;
+    box-shadow: 0 0 0 2px #222020 inset,
+                0 0 0 1px #222020;
+    max-height: calc(100% - 26px);
+  }
+
+  .desktop {
+    background-image: url('image/sunset-tile.png');
+  }
+
+  .icon-container {
+    margin: 15px 0 0 15px;
+    width: 52px;
+    gap: 2px;
+  }
+
+  .desktop-icon-image {
+    content: url('image/leather_desktop.png');
+  }
+
+  .desktop-icon-text {
+    font-size: 12px;
+    max-width: 50px;
+  }
+
+  footer {
+    height: 20px;
+    background-image: url('image/menu-tile.png');
+    border-top: 1px solid #32302c;
+    box-shadow: 1px 1px #fffefe inset,
+                -1px -1px #948c79 inset;
+    font-size: 12px;
+  }
+
+  .taskbar-container {
+    box-shadow: -1px -1px #948c79 inset,
+                1px 1px 0 0 #fffefe inset;
+  }
+
+  .start-button {
+    gap: 10px;
+    width: 40px;
+    box-shadow: -1px -1px #948c79 inset,
+                -1px 0 0 0 #fffefe inset;
+
+  }
+
+  .start-menu-content {
+    bottom: 22px;
+    left: -1px;
+    min-width: 57px;
+    box-shadow: 0 0 0 1px #32302c inset,
+                2px 2px #fffefe inset,
+                -2px -2px #948c79 inset;
+    font-size: 12px;
+    min-height: 200px;
+    min-width: 100px;
+  }
+
+  #taskbar-button {
+    width: 180px;
+    margin: 3px 0 3px 3px;
+    font-size: 10px;
+  }
+
+  .taskbar-button-active {
+    background-image: url('image/menu_hover-tile.png');
+    box-shadow: -1px -1px #92998b inset,
+                1px 1px #5c6057 inset;
+  }
+
+  #taskbar-button img {
+    max-height: 11px;
+    margin: 2px;
+  }
+
+  header {
+    height: 22px;
+    background-image: url('image/titlebar-tile.png');
+    top: 4px;
+    margin-left: calc(-50% + 4px);
+    width: calc(100% - 8px);
+    box-shadow: 0 -1px 0 0 #5c6057 inset;
+    gap: 20px;
+  }
+
+  .menu-button {
+    gap: 10px;
+    width: 23px;
+  }
+
+  .title-text {
+    font-size: 12px;
+    height: 22px;
+  }
+
+  .title-buttons {
+    width: 63px;
+  }
+
+  .title-buttons img {
+    padding: 5px;
+  }
+
+  .dropdown-content {
+    top: 22px;
+    background-image: url('image/menu-tile.png');
+    min-width: 57px;
+    box-shadow: 0 0 0 1px #32302c inset,
+                2px 2px #fffefe inset,
+                -2px -2px #948c79 inset,
+                0px 8px 16px 0px rgba(0,0,0,0.2);
+    font-size: 12px;
+  }
+
+  .dropdown-content a {
+    margin: 2px;
+    text-indent: -3px;
+    padding: 2px 5px;
+  }
+
+  .dropdown-content a:hover {
+    background-image: url('image/menu_hover-tile.png');
+    box-shadow: -1px -1px #92998b inset,
+                1px 1px #5c6057 inset;
+  }
+
+  .container {
+    padding: 50px 0 50px 0;
+    background-image: url('image/Untitled.png');
+  }
+
+  .container a {
+    padding: 3%;
+  }
+
+  .small-container {
+    height: 300px;
+  }
+
+  .small-container-border {
+    box-shadow: 0 0 0 2px #222020,
+                0 0 0 4px #32302c,
+                0 0 0 5px #222020;
+  }
+
+  .dividend {
+    width: 70%;
+  }
+
+  .lmr001 {
+    width: 50%;
+  }
+}
